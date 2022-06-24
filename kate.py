@@ -10,26 +10,32 @@ Created on Fri Jun 24 19:34:09 2022
 from skimage import io
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
-io.use_plugin('pil')
-img1 = io.imread('20220117_E2_Cell8BF.tif')
+# io.use_plugin('pil')
+# img1 = io.imread('20220117_E2_Cell8BF.tif')
 
-plt.imshow(img1)
+# plt.imshow(img1)
+# plt.show()
 
-img1 = io.imread('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
+# img2 = io.imread('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
 
-plt.imshow(img1)
+# plt.imshow(img2)
+# plt.show()
 
-print(img1.shape)
-
+# print(img1)
 
 # 10x : 1022 nm/px (JPK camera) - not sure we can really be precise at the nm for this one.
 # 20x: 506 nm/px (JPK camera)
 
-# path = "project-corima-main/"
-# from PIL import Image
-# im = Image.open('topo_qi-data-2022.02.02-18.13.50.881_processed-2022.04.26-19.47.40.tif')
-# im.show()
+from PIL import Image
+im = Image.open('20220117_E2_Cell8BF.tif')
+plt.imshow(im)
+pix = np.array(im)
+print(pix)
+
+
+
 #fjxhfksdh
 
 # import numpy as np
