@@ -30,3 +30,5 @@ qi-data-2022.02.02-18.46.55.387_processed-2022.04.14-16.04.07.tsv
 topo_qi-data-2022.02.02-18.46.55.387_processed-2022.04.14-16.04.07.tif
 
 YM_qi-data-2022.02.02-18.46.55.387_processed-2022.04.14-16.04.07.tif
+
+an additional folder contaning a new dataset has been added. it contains 18 topo/YM maps pairs to correlate to a single image (- nathanael)
