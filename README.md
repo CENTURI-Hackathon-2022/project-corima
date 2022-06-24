@@ -1,5 +1,5 @@
-**# CORIMA
- Correlating optical images and mechanical maps**
+# CORIMA
+ Correlating optical images and mechanical maps
 
 
 This repository contains optical images and AFM maps to correlate:
