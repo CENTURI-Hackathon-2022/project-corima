@@ -29,7 +29,7 @@ print(img1.shape)
 # from PIL import Image
 # im = Image.open('topo_qi-data-2022.02.02-18.13.50.881_processed-2022.04.26-19.47.40.tif')
 # im.show()
-
+#fjxhfksdh
 
 # import numpy as np
 # imarray = np.array(image)
