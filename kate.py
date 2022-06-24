@@ -21,7 +21,7 @@ img1 = io.imread('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_proces
 plt.imshow(img1)
 
 print(img1.shape)
-#fdksflsdkj
+
 
 # 10x : 1022 nm/px (JPK camera) - not sure we can really be precise at the nm for this one.
 # 20x: 506 nm/px (JPK camera)
