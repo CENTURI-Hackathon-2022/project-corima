@@ -65,8 +65,26 @@ def position_of_min(d):
     return result
 
 
+if __name__ == "__main__":
+    file = input("give the name of the file")
+    Big = input("name of the big image")
+    b = tiff.imread(Big)
 
-distanc = distance_two_images(b, a)
-res = position_of_min(distanc)
+with open(file,"r") as fic:
+         ret =[ligne.strip(" \n")for ligne in fic]
+         print(ret)
+         number = len(ret)
+         print(number)
+                  
+    
+    
+         for i,file in enumerate(ret):
+             a = tiff.imread(file)
+             
+        
+             distanc = distance_two_images(b, a)
+             res = position_of_min(distanc)
+
+
 
 
