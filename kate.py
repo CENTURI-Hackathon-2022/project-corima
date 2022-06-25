@@ -7,90 +7,66 @@ Created on Fri Jun 24 19:34:09 2022
 """
 
 
-from skimage import io
+import io
 import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-# io.use_plugin('pil')
-# img1 = io.imread('20220117_E2_Cell8BF.tif')
 
-# plt.imshow(img1)
-# plt.show()
 
-# img2 = io.imread('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
 
-# plt.imshow(img2)
-# plt.show()
+import tifffile as tiff
+import cv2
+a = tiff.imread('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
+#im1 = Image.open('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
+b = tiff.imread('20220117_E2_Cell8BF.tif')
 
-# print(img1)
+im = cv2.imread('a.tif', -1)
+print(a)
+print(b)
 
-# 10x : 1022 nm/px (JPK camera) - not sure we can really be precise at the nm for this one.
-# 20x: 506 nm/px (JPK camera)
-import PIL
-from PIL import Image
-from PIL.TiffTags import TAGS
-im = Image.open('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
-plt.imshow(im)
+# from numba import jit
+# @jit(nopython=True,parallel=True)
 
-pix = np.array(im)
 
-# meta_dict = {TAGS[key] : im.tag[key] for key in im.tag_v2}
-# meta_dict
-# info_dict = {
-#     "Filename": im.filename,
-#     "Image Size": im.size,
-#     "Image Height": im.height,
-#     "Image Width": im.width,
-#     "Image Format": im.format,
-#     "Image Mode": im.mode,
-#     "Image is Animated": getattr(im, "is_animated", False),
-#     "Frames in Image": getattr(im, "n_frames", 1),
-#     "info": im.info
-# }
+# def dif_mat(M1,M2):
+#         for i in range(M1.shape[0],140):
+#             for j in rangerange(M1.shape[1],140):
+                
 
-# for label,value in info_dict.items():
-#     print(f"{label:25}: {value}")
 
-print(PIL.__version__)
-exifdata = im.getexif()
 
-for tag_id in exifdata:
-    # get the tag name, instead of human unreadable tag id
-    tag = TAGS.get(tag_id, tag_id)
-    data = exifdata.get(tag_id)
-    # decode bytes 
-    if isinstance(data, bytes):
-        data = data.decode()
-    print(f"{tag:25}: {data}")
+
+
+def distance_two_images(im1, im2):
+    """ the euclidean square distance of two images in terms of intensity is calculated
+    :im1 np.array of the big image
+    :im2 np.array of the small image   """
     
-for label,value in exif():
-    print(f"{label:25}: {value}")
+    (height, width) = np.shape(im1)
+    (h, w) = np.shape(im2)
+    d = np.empty((height - h, width - w))
+    
+    for row in range(height - h):
+        for col in range(width - w):
+            d[row,col] = np.sum( np.square( np.subtract(im1[0+row : h+row, 0+col : w+col] , im2) ))
+    
+    return d
+    
+
+def position_of_min(d):
+    """ determine the position of minimum
+    :d np.array of distances """
+    
+    result = np.where(d == np.amin(d))
+    print("the minimum distance is: ", np.amin(d))
+    print('Tuple of arrays returned : ', result)
+    
+    return result
 
 
-# import tifffile as tiff
-# import cv
-# a = tiff.imread('topo_20220107_Exp2Cell8map-data-2022.01.07-16.34.34.510_processed-2022.01.10-12.38.51.tif')
-# im = cv2.imread('a.tif', -1)
+
+distanc = distance_two_images(b, a)
+res = position_of_min(distanc)
 
 
-# print(pix)
-# meta_dict = {TAGS[key] : im.tag[key] for key in im.tag_v2}
-# print(meta_dict)
-#fjxhfksdh
-
-# import numpy as np
-# imarray = np.array(image)
-# imarray
-
-
-# import numpy
-# imarray = numpy.array(im)
-# print(imarray.shape)
-
-# from PIL import image
-# from skimage import io
-# io.use_plugin('pil')
-# images = os.listdir(train_data_path)
-# for image_name in images:
-#     img = io.imread(os.path.join(train_data_path, image_name))
